@@ -1,0 +1,327 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Varela Round', sans-serif;
+    background: linear-gradient(135deg, rgb(255, 248, 176) 0%, rgb(255, 244, 163) 50%, rgb(255, 230, 109) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #8B4513;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Corações flutuantes no fundo */
+.hearts-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 182, 193, 0.3);
+    transform: rotate(45deg);
+    animation: float 15s infinite ease-in-out;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 182, 193, 0.3);
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -15px;
+    left: 0;
+}
+
+.heart::after {
+    left: 15px;
+    top: 0;
+}
+
+.heart:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 12s;
+}
+
+.heart:nth-child(2) {
+    left: 30%;
+    animation-delay: 2s;
+    animation-duration: 14s;
+}
+
+.heart:nth-child(3) {
+    left: 50%;
+    animation-delay: 4s;
+    animation-duration: 16s;
+}
+
+.heart:nth-child(4) {
+    left: 70%;
+    animation-delay: 1s;
+    animation-duration: 13s;
+}
+
+.heart:nth-child(5) {
+    left: 85%;
+    animation-delay: 3s;
+    animation-duration: 15s;
+}
+
+.heart:nth-child(6) {
+    left: 20%;
+    animation-delay: 5s;
+    animation-duration: 17s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(45deg) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(45deg) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Container principal */
+.container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+/* Título */
+.title {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #7C3B31;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+    /* animation: titlePulse 2s ease-in-out infinite; */
+}
+
+@keyframes titlePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Subtítulo */
+.subtitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #8B4513;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* Wrapper do personagem */
+.character-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 2rem 0;
+}
+
+/* Personagem */
+.character {
+    width: 450px;
+    height: 450px;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+    position: relative;
+    z-index: 2;
+}
+
+.character:hover {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.character.clicked {
+    animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(1) translateY(0);
+    }
+    25% {
+        transform: scale(1.1) translateY(-20px);
+    }
+    50% {
+        transform: scale(1.05) translateY(-10px);
+    }
+    75% {
+        transform: scale(1.08) translateY(-15px);
+    }
+}
+
+/* Balão de fala */
+.speech-bubble {
+    position: absolute;
+    top: -180px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.speech-bubble.show {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+}
+
+.speech-bubble img {
+    width: 350px;
+    height: auto;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+}
+
+/* Dica */
+.hint {
+    font-size: 1.2rem;
+    color: #7C3B31;
+    margin-top: 1.5rem;
+    font-weight: 500;
+    animation: blink 2s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Partículas de coração que aparecem ao clicar */
+.heart-particle {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: #ff69b4;
+    transform: rotate(45deg);
+    pointer-events: none;
+    z-index: 999;
+    animation: particleFloat 2s ease-out forwards;
+}
+
+.heart-particle::before,
+.heart-particle::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ff69b4;
+    border-radius: 50%;
+}
+
+.heart-particle::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart-particle::after {
+    left: 10px;
+    top: 0;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) rotate(45deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-200px) rotate(405deg) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .title {
+        font-size: 3rem;
+    }
+    
+    .subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .character {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .speech-bubble img {
+        width: 280px;
+    }
+    
+    .speech-bubble {
+        top: -150px;
+    }
+    
+    .hint {
+        font-size: 1rem;
+        margin: 1rem 3.2rem 0 3.2rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .character {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .speech-bubble img {
+        width: 270px;
+    }
+    
+    .speech-bubble {
+        top: -175px;
+    }
+}
