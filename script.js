@@ -91,7 +91,7 @@ pompompurin.addEventListener('click', (e) => {
     for (let i = 0; i < 8; i++) {
         setTimeout(() => {
             createHeartParticle(e.clientX, e.clientY);
-        }, i * 100);
+        }, i * 1);
     }
     
     showPhrase();
