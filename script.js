@@ -117,3 +117,14 @@ pompompurin.addEventListener('mouseleave', () => {
         pompompurin.style.transform = '';
     }
 });
+
+// Audio on page
+const audio = document.querySelector('audio');
+
+// Try to play immediately
+audio.play().catch(() => {
+    // If blocked, wait for first click anywhere on the page
+    document.addEventListener('click', () => {
+        audio.play();
+    }, { once: true });
+});
